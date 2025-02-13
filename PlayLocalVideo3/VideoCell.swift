@@ -7,6 +7,7 @@
 
 // VideoCell.swift
 import UIKit
+import SnapKit
 
 class VideoCell: UITableViewCell {
     static let reuseIdentifier = "VideoCell"
@@ -60,19 +61,21 @@ class VideoCell: UITableViewCell {
         videoTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         videoSourceLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        NSLayoutConstraint.activate([
-            videoScreenshot.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            videoScreenshot.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            videoScreenshot.widthAnchor.constraint(equalToConstant: 80),
-            videoScreenshot.heightAnchor.constraint(equalToConstant: 80),
+        videoScreenshot.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
 
-            videoTitleLabel.leadingAnchor.constraint(equalTo: videoScreenshot.trailingAnchor, constant: 10),
-            videoTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            videoTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+        videoTitleLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().inset(10)
+//            make.width.equalTo(30)
+        }
 
-            videoSourceLabel.leadingAnchor.constraint(equalTo: videoScreenshot.trailingAnchor, constant: 10),
-            videoSourceLabel.topAnchor.constraint(equalTo: videoTitleLabel.bottomAnchor, constant: 5),
-            videoSourceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
-        ])
+        videoSourceLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().inset(10)
+//            make.width.equalTo(30)
+        }
+
     }
 }

@@ -9,6 +9,7 @@
 import UIKit
 import AVKit
 import AVFoundation
+import SnapKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // 视频表格视图
@@ -30,17 +31,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         configureTableView()
     }
 
+//    override func didReceiveMemoryWarning() {
+//        super.didReceiveMemoryWarning()
+//        // Dispose of any resources that can be recreated.
+//    }
+
     // 设置用户界面
     private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(videoTableView)
         videoTableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            videoTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            videoTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            videoTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            videoTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        videoTableView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.leading.equalTo(view.snp.leading)
+            make.trailing.equalTo(view.snp.trailing)
+            make.bottom.equalTo(view.snp.bottom)
+        }
     }
 
     // 配置表格视图
